@@ -1,0 +1,14 @@
+{
+    "model": {
+        "map_size": "50x50",
+        "learning_rate": 0.5,
+        "sigma": 1.0,
+        "iterations": 10000,
+        "random_seed": null
+    },
+    "training": {
+        "start_time": "2025-01-27T19:25:26.860389+00:00",
+        "end_time": "2025-01-27T19:25:29.992096+00:00",
+        "duration_seconds": 3.131706953048706
+    }
+}
