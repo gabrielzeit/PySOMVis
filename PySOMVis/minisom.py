@@ -18,13 +18,6 @@ from numpy.testing import assert_array_equal
 import unittest
 
 
-# for PROC-V and FAIR4ML data
-import json
-import platform
-import os
-import subprocess
-from rdflib import Graph, Literal, Namespace, RDF
-from datetime import datetime, timezone
 
 """
     Minimalistic implementation of the Self Organizing Maps (SOM).
@@ -419,10 +412,8 @@ class MiniSom(object):
             In one epoch the weights are updated len(data) times and
             the learning rate is constat throughout a single epoch.
         """
-        # collect starting time
-        start_time = datetime.now(timezone.utc).isoformat()
-        start_timestamp = time()
-
+        
+        
         self._check_iteration_number(num_iteration)
         self._check_input_len(data)
         random_generator = None
@@ -443,68 +434,9 @@ class MiniSom(object):
             self.update(data[iteration], self.winner(data[iteration]),
                         decay_rate, num_iteration)
             
-        
-        # collect end time
-        end_time = datetime.now(timezone.utc).isoformat()
-        end_timestamp = time()
-        duration = end_timestamp - start_timestamp
-
-        # systeminformation
-        system_info = {
-            "os": platform.system(),
-            "os_version": platform.version(),
-            "python_version": platform.python_version(),
-            "cpu": platform.processor(),
-            "ram": str(round(os.sysconf('SC_PAGE_SIZE') * os.sysconf('SC_PHYS_PAGES') / (1024. ** 3), 2)) + " GB"
-        }
-
-        # git-info
-        git_commit = "N/A"
-        try:
-            git_commit = subprocess.check_output(["git", "rev-parse", "HEAD"]).strip().decode()
-        except Exception:
-            pass
-        
-        # generate metadata for FAIR4ML and PROV-O
-        metadata = {
-            "model": {
-                "map_size": f"{self._weights.shape[0]}x{self._weights.shape[1]}",
-                "learning_rate": self._learning_rate,
-                "sigma": self._sigma,
-                "iterations": num_iteration,
-                "random_seed": self._random_generator.randint(0, 10000) if random_order else None
-            },
-            "training": {
-                "start_time": start_time,
-                "end_time": end_time,
-                "duration_seconds": duration
-            }
-        }
-        
-        # save metadata JSON
-        with open("training_metadata.json", "w") as f:
-            json.dump(metadata, f, indent=4)
-
-        # create PROV-O provenance doc
-        prov = Namespace("http://www.w3.org/ns/prov#")
-        g = Graph()
-        training_activity = Literal("training_activity")
-        g.add((training_activity, RDF.type, prov.Activity))
-        g.add((training_activity, prov.startedAtTime, Literal(start_time)))
-        g.add((training_activity, prov.endedAtTime, Literal(end_time)))
-        g.add((training_activity, prov.used, Literal("SOM Training Data")))
-        g.add((training_activity, prov.generated, Literal("SOM Model")))
-        g.add((training_activity, prov.wasAssociatedWith, Literal(platform.node())))
-        g.add((training_activity, prov.usedSoftware, Literal(f"Python {platform.python_version()}")))
-        g.add((training_activity, prov.wasDerivedFrom, Literal(f"Git Commit: {git_commit}")))
-        
-        with open("training_provenance.ttl", "w") as f:
-            f.write(g.serialize(format="turtle"))
-
 
         if verbose:
             print('\n quantization error:', self.quantization_error(data))
-            print("Training metadata saved to training_metadata.json")
 
     def train_random(self, data, num_iteration, verbose=False):
         """Trains the SOM picking samples at random from data.

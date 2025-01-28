@@ -1,0 +1,12 @@
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+"training_activity" a prov:Activity ;
+    prov:dataset "unknown_dataset" ;
+    prov:endedAtTime "2025-01-28T08:45:35.167919+00:00" ;
+    prov:generated "SOM Model" ;
+    prov:startedAtTime "2025-01-28T08:45:35.167210+00:00" ;
+    prov:used "SOM Training Data" ;
+    prov:usedSoftware "Python 3.9.21" ;
+    prov:wasAssociatedWith "DESKTOP-TIC1UDI" ;
+    prov:wasDerivedFrom "Git Commit: 2dd930291f062543cb059f9fc541830434542fe8" .
+
