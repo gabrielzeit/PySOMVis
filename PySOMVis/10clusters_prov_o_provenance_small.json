@@ -1,0 +1,57 @@
+{
+    "content": "PROV-O Provenance",
+    "entities": {
+        "10clusters/10clusters.vec_dataset": {
+            "type": "Entity",
+            "label": "10clusters/10clusters.vec Dataset",
+            "generatedAtTime": "2025-01-28T10:51:51.398329",
+            "wasAttributedTo": "Valentin Rieu, Gabriel Zeisz",
+            "wasGeneratedBy": "DataCollectionActivity"
+        },
+        "trained_som_model": {
+            "type": "Entity",
+            "label": "Trained SOM Model",
+            "generatedAtTime": "2025-01-28T10:51:51.398329",
+            "wasDerivedFrom": "10clusters/10clusters.vec_dataset",
+            "wasGeneratedBy": "ModelTrainingActivity"
+        }
+    },
+    "activities": {
+        "DataCollectionActivity": {
+            "type": "Activity",
+            "label": "Data Collection",
+            "startedAtTime": "2025-01-28T10:51:51.398329",
+            "endedAtTime": "2025-01-28T10:51:51.398329",
+            "used": "https://github.com/gabrielzeit/PySOMVis/tree/main/PySOMVis/datasets",
+            "wasAssociatedWith": "Valentin Rieu, Gabriel Zeisz"
+        },
+        "ModelTrainingActivity": {
+            "type": "Activity",
+            "label": "Model Training",
+            "startedAtTime": "2025-01-28T10:51:51.398329",
+            "endedAtTime": "2025-01-28T10:51:51.398329",
+            "used": "10clusters/10clusters.vec_dataset",
+            "wasAssociatedWith": "MiniSomLibrary"
+        }
+    },
+    "agents": {
+        "Authors": [
+            {
+                "name": "Valentin Rieu",
+                "type": "Person",
+                "studentID": "12404743",
+                "actedOnBehalfOf": "TU Wien"
+            },
+            {
+                "name": "Gabriel Zeisz",
+                "type": "Person",
+                "studentID": "12110695",
+                "actedOnBehalfOf": "TU Wien"
+            }
+        ],
+        "MiniSomLibrary": {
+            "type": "SoftwareAgent",
+            "label": "MiniSom Library"
+        }
+    }
+}

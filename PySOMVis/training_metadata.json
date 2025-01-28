@@ -13,7 +13,7 @@
                 "email": "e12110695@student.tuwien.ac.at"
             }
         ],
-        "git_commit": "2dd930291f062543cb059f9fc541830434542fe8",
+        "git_commit": "74bfaa287c1bf83555f784d36ed35265fd03a0b5",
         "system_info": {
             "os": "Windows",
             "os_version": "10.0.19045",
@@ -36,17 +36,17 @@
         ]
     },
     "model": {
-        "map_size": "10x10",
-        "learning_rate": 0.5,
-        "sigma": 1.0,
+        "map_size": "100x60",
+        "learning_rate": 80,
+        "sigma": 100,
         "iterations": 100,
-        "random_seed": 1205
+        "random_seed": 8048
     },
     "training": {
-        "start_time": "2025-01-28T08:45:35.167210+00:00",
-        "end_time": "2025-01-28T08:45:35.167919+00:00",
-        "duration_seconds": 0.0007090568542480469,
+        "start_time": "2025-01-28T09:56:31.051569+00:00",
+        "end_time": "2025-01-28T09:56:31.120991+00:00",
+        "duration_seconds": 0.06942200660705566,
         "dataset_name": "unknown_dataset",
-        "dataset_shape": "(150, 4)"
+        "dataset_shape": "(850, 10)"
     }
 }
